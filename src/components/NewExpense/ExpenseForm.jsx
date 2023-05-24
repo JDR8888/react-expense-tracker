@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import '../../assets/css/ExpenseForm.css';
 
 const ExpenseForm = (props)  => {
+
     const [formState, setFormState] = useState({
         enteredTitle: "",
         enteredAmount: "",
         enteredDate: ""
     });
-
-
     const handleTitleChange = (event) => {
         setFormState((prevState) => {
             return{...prevState,
@@ -27,6 +26,7 @@ const ExpenseForm = (props)  => {
             enteredDate: event.target.value }
         });   
     }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const expenseData = {
@@ -41,10 +41,11 @@ const ExpenseForm = (props)  => {
             enteredTitle: "",
             enteredDate: ""
         })
+        props.onHandleFormOpen()
     }
 
     return (
-            <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                 <div className="new-expense__controls">
                     <div className="new-expense__control">
                         <label> Title </label>
@@ -60,9 +61,10 @@ const ExpenseForm = (props)  => {
                     </div>
                 </div>
                 <div className="new-expense__actions">
-                    <button type="submit"> Add Expense </button>
+                    <button  type="submit"> Add Expense </button>
+                    <button type="button" onClick={props.onHandleFormOpen}> Cancel </button>
                 </div>
-            </form>
+            </form>       
     )
 }
 export default ExpenseForm;

@@ -5,18 +5,16 @@ import Card from "../UI/Card";
 import ExpensesFilter from "./ExpenseFilter";
 
 const Expense = (props) => {
-    const [expenses, setExpenses] = useState(props.expense);
-    const [filteredYear, setFilteredYear] = useState("2023");
 
+    const [filteredYear, setFilteredYear] = useState("2023");
     const handleFilter = (selectedYear) => {
         setFilteredYear(selectedYear);
     }
-    
-    const filteredExpenses = expenses.filter(expense => {
+    const filteredExpenses = props.expense.filter(expense => {
         // our filtered year is a string, so to compare that to the date object of each expense object, we need to just get the year from the date (with getFullYear()) and then convert it to a string. DO NOT FORGET THE () on getFullYear!!!!! it is a method.
         return expense.date.getFullYear().toString() === filteredYear;
     })
-    // console.log(filteredExpenses);
+    
     return (
         <div>
             <Card className="expenses">
